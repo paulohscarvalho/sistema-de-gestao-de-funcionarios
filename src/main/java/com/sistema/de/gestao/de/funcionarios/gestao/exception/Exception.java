@@ -12,12 +12,12 @@ import org.springframework.web.context.request.WebRequest;
 public class Exception {
 
     @ExceptionHandler(value = {HttpMessageNotReadableException.class, java.lang.NullPointerException.class})
-    protected ResponseEntity<String> dadosInválidosDeRequest(RuntimeException ex, WebRequest request) {
-        return  ResponseEntity.badRequest().body("Verifique os dados e tente novamente.");
+    protected ResponseEntity<String> dadosInvalidosDeRequest(RuntimeException ex, WebRequest request) {
+        return ResponseEntity.badRequest().body("Verifique os dados e tente novamente.");
     }
 
     @ExceptionHandler(value = {UsuarioJaAdicionadoException.class})
     protected ResponseEntity<String> usuarioJaAdicionado(UsuarioJaAdicionadoException usuarioJaAdicionadoException, WebRequest request) {
-        return  ResponseEntity.badRequest().body(usuarioJaAdicionadoException.getMessage());
+        return ResponseEntity.badRequest().body(usuarioJaAdicionadoException.getMessage());
     }
 }

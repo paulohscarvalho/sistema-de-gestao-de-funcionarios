@@ -3,7 +3,9 @@ package com.sistema.de.gestao.de.funcionarios.gestao.service.impl;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioRequestDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.entity.FuncionarioEntity;
 import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.UsuarioJaAdicionadoException;
+import com.sistema.de.gestao.de.funcionarios.gestao.repository.FuncionarioRepository;
 import com.sistema.de.gestao.de.funcionarios.gestao.service.FuncionarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -11,6 +13,9 @@ import java.util.Map;
 
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
+
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
 
     public Map<Long, FuncionarioEntity> initializateHashMap(Map<Long, FuncionarioEntity> funcionarios) {
         if (funcionarios == null) {
@@ -28,7 +33,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
             throw new UsuarioJaAdicionadoException();
         }
 
-        funcionarios.put(funcionarioRequestDTO.getIdFuncionario(), funcionarioRequestDtoToEntity(funcionarioRequestDTO));
+        funcionarios = funcionarioRepository.insertFuncionario(funcionarios, funcionarioRequestDtoToEntity(funcionarioRequestDTO));
 
         return funcionarios;
     }
