@@ -1,6 +1,5 @@
 package com.sistema.de.gestao.de.funcionarios.gestao.repository;
 
-import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioRequestDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioResponseDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.entity.FuncionarioEntity;
 import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.NenhumUsuarioCadastradoException;

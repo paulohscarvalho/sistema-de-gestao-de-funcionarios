@@ -3,7 +3,7 @@ package com.sistema.de.gestao.de.funcionarios.gestao.controller;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioRequestDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioResponseDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.entity.FuncionarioEntity;
-import com.sistema.de.gestao.de.funcionarios.gestao.service.impl.FuncionarioServiceImpl;
+import com.sistema.de.gestao.de.funcionarios.gestao.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.Set;
 
+@RequestMapping(value = "/v1")
 @RestController
-@RequestMapping("/api/v1")
 public class FuncionarioController {
 
     @Autowired
-    private FuncionarioServiceImpl funcionarioService;
+    private FuncionarioService funcionarioService;
     private Map<Long, FuncionarioEntity> funcionarios;
 
     @PostMapping("/insertFuncionario")
@@ -35,13 +35,13 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionarioService.getFuncionarios(funcionarios));
     }
 
-    @PostMapping("/updateFuncionario")
+    @PutMapping("/updateFuncionario")
     public ResponseEntity<String> updateFuncionario(@RequestBody FuncionarioRequestDTO funcionarioRequestDTO) {
         funcionarios = funcionarioService.updateFuncionarioById(funcionarios, funcionarioRequestDTO);
         return ResponseEntity.ok("Registro alterado com sucesso!");
     }
 
-    @PostMapping("/deleteFuncionario/{id}")
+    @DeleteMapping("/deleteFuncionario/{id}")
     public ResponseEntity<String> deleteFuncionarioById(@PathVariable Long id) {
         funcionarios = funcionarioService.deleteFuncionarioById(funcionarios, id);
         return ResponseEntity.ok("Funcionario deletado com sucesso!");

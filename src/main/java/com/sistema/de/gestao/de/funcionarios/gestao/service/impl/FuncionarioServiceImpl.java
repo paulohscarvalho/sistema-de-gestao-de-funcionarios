@@ -3,7 +3,9 @@ package com.sistema.de.gestao.de.funcionarios.gestao.service.impl;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioRequestDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioResponseDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.entity.FuncionarioEntity;
+import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.NenhumUsuarioCadastradoException;
 import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.UsuarioJaAdicionadoException;
+import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.UsuarioNaoEncontradoException;
 import com.sistema.de.gestao.de.funcionarios.gestao.repository.FuncionarioRepository;
 import com.sistema.de.gestao.de.funcionarios.gestao.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,22 +60,36 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public Set<Map.Entry<Long, FuncionarioEntity>> getFuncionarios(Map<Long, FuncionarioEntity> funcionarios) {
+        if (funcionarios.isEmpty()) {
+            throw new NenhumUsuarioCadastradoException();
+        }
         return funcionarioRepository.getFuncionarios(funcionarios);
     }
 
     @Override
     public FuncionarioResponseDTO getFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id) {
+        if (funcionarios.isEmpty()) {
+            throw new UsuarioNaoEncontradoException();
+        }
+
         return funcionarioRepository.getFuncionarioById(funcionarios, id);
     }
 
     @Override
     public Map<Long, FuncionarioEntity> updateFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, FuncionarioRequestDTO funcionarioDTO) {
         FuncionarioEntity funcionarioEntity = funcionarioRequestDtoToEntity(funcionarioDTO);
+
+        if (funcionarios.isEmpty()) {
+            throw new UsuarioNaoEncontradoException();
+        }
         return funcionarioRepository.updateFuncionarioById(funcionarios, funcionarioEntity);
     }
 
     @Override
     public Map<Long, FuncionarioEntity> deleteFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id) {
+        if (funcionarios.isEmpty()) {
+            throw new UsuarioNaoEncontradoException();
+        }
         return funcionarioRepository.deleteFuncionarioById(funcionarios, id);
     }
 }
