@@ -55,4 +55,13 @@ public class FuncionarioRepository {
             throw new UsuarioNaoEncontradoException();
         }
     }
+
+    public Map<Long, FuncionarioEntity> deleteFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id) {
+        try {
+            funcionarios.remove(id);
+            return funcionarios;
+        } catch (Exception e) {
+            throw new UsuarioNaoEncontradoException();
+        }
+    }
 }

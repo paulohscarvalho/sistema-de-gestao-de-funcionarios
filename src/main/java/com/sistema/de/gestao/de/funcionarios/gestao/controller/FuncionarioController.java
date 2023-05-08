@@ -41,5 +41,10 @@ public class FuncionarioController {
         return ResponseEntity.ok("Registro alterado com sucesso!");
     }
 
+    @PostMapping("/deleteFuncionario/{id}")
+    public ResponseEntity<String> deleteFuncionarioById(@PathVariable Long id) {
+        funcionarios = funcionarioService.deleteFuncionarioById(funcionarios, id);
+        return ResponseEntity.ok("Funcionario deletado com sucesso!");
+    }
 
 }

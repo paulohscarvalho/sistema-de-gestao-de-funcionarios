@@ -73,7 +73,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public Map<Long, FuncionarioEntity> deleteFuncionarioById() {
-        return null;
+    public Map<Long, FuncionarioEntity> deleteFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id) {
+        return funcionarioRepository.deleteFuncionarioById(funcionarios, id);
     }
 }
