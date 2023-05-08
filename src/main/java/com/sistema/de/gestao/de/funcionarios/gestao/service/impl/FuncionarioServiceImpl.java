@@ -67,8 +67,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public Map<Long, FuncionarioEntity> updateFuncionarioById() {
-        return null;
+    public Map<Long, FuncionarioEntity> updateFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, FuncionarioRequestDTO funcionarioDTO) {
+        FuncionarioEntity funcionarioEntity = funcionarioRequestDtoToEntity(funcionarioDTO);
+        return funcionarioRepository.updateFuncionarioById(funcionarios, funcionarioEntity);
     }
 
     @Override

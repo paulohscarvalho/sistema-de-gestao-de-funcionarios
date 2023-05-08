@@ -1,5 +1,6 @@
 package com.sistema.de.gestao.de.funcionarios.gestao.repository;
 
+import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioRequestDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioResponseDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.entity.FuncionarioEntity;
 import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.NenhumUsuarioCadastradoException;
@@ -42,6 +43,16 @@ public class FuncionarioRepository {
             return funcionarios.entrySet();
         } catch (Exception e) {
             throw new NenhumUsuarioCadastradoException();
+        }
+    }
+
+    public Map<Long, FuncionarioEntity> updateFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, FuncionarioEntity funcionarioEntity) {
+        try {
+            funcionarios.get(funcionarioEntity.getIdFuncionario());
+            funcionarios.put(funcionarioEntity.getIdFuncionario(), funcionarioEntity);
+            return funcionarios;
+        } catch (Exception e) {
+            throw new UsuarioNaoEncontradoException();
         }
     }
 }

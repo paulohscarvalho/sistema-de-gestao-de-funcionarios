@@ -35,4 +35,11 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionarioService.getFuncionarios(funcionarios));
     }
 
+    @PostMapping("/updateFuncionario")
+    public ResponseEntity<String> updateFuncionario(@RequestBody FuncionarioRequestDTO funcionarioRequestDTO) {
+        funcionarios = funcionarioService.updateFuncionarioById(funcionarios, funcionarioRequestDTO);
+        return ResponseEntity.ok("Registro alterado com sucesso!");
+    }
+
+
 }

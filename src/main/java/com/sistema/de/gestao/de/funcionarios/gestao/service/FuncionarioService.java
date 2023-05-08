@@ -15,7 +15,7 @@ public interface FuncionarioService {
 
     public FuncionarioResponseDTO getFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id);
 
-    public Map<Long, FuncionarioEntity> updateFuncionarioById();
+    public Map<Long, FuncionarioEntity> updateFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, FuncionarioRequestDTO funcionarioDTO);
 
     public Map<Long, FuncionarioEntity> deleteFuncionarioById();
 }
