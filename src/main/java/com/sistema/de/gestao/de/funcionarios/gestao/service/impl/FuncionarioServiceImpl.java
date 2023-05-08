@@ -68,10 +68,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public FuncionarioResponseDTO getFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id) {
-        if (funcionarios.isEmpty()) {
+        try {
+            if (funcionarios.isEmpty()) {
+                throw new UsuarioNaoEncontradoException();
+            }
+        } catch (Exception e) {
             throw new UsuarioNaoEncontradoException();
         }
-
         return funcionarioRepository.getFuncionarioById(funcionarios, id);
     }
 

@@ -20,7 +20,7 @@ public class Exception {
 
     @ExceptionHandler(value = {UsuarioJaAdicionadoException.class})
     protected ResponseEntity<String> usuarioJaAdicionado(UsuarioJaAdicionadoException usuarioJaAdicionadoException, WebRequest request) {
-        return ResponseEntity.badRequest().body(usuarioJaAdicionadoException.getMessage());
+        return ResponseEntity.status(409).body(usuarioJaAdicionadoException.getMessage());
     }
 
     @ExceptionHandler(value = {UsuarioNaoEncontradoException.class})
