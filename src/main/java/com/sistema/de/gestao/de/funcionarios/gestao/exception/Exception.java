@@ -1,6 +1,8 @@
 package com.sistema.de.gestao.de.funcionarios.gestao.exception;
 
+import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.NenhumUsuarioCadastradoException;
 import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.UsuarioJaAdicionadoException;
+import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.UsuarioNaoEncontradoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,5 +21,15 @@ public class Exception {
     @ExceptionHandler(value = {UsuarioJaAdicionadoException.class})
     protected ResponseEntity<String> usuarioJaAdicionado(UsuarioJaAdicionadoException usuarioJaAdicionadoException, WebRequest request) {
         return ResponseEntity.badRequest().body(usuarioJaAdicionadoException.getMessage());
+    }
+
+    @ExceptionHandler(value = {UsuarioNaoEncontradoException.class})
+    protected ResponseEntity<String> usuarioNaoEncontradoException(UsuarioNaoEncontradoException usuarioNaoEncontradoException, WebRequest request) {
+        return ResponseEntity.status(404).body(usuarioNaoEncontradoException.getMessage());
+    }
+
+    @ExceptionHandler(value = {NenhumUsuarioCadastradoException.class})
+    protected ResponseEntity nenhumUsuarioCadastrado(NenhumUsuarioCadastradoException nenhumUsuarioCadastrado, WebRequest request) {
+        return ResponseEntity.status(204).build();
     }
 }

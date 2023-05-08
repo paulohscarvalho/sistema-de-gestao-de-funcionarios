@@ -1,6 +1,7 @@
 package com.sistema.de.gestao.de.funcionarios.gestao.service.impl;
 
 import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioRequestDTO;
+import com.sistema.de.gestao.de.funcionarios.gestao.dto.FuncionarioResponseDTO;
 import com.sistema.de.gestao.de.funcionarios.gestao.entity.FuncionarioEntity;
 import com.sistema.de.gestao.de.funcionarios.gestao.exception.customException.UsuarioJaAdicionadoException;
 import com.sistema.de.gestao.de.funcionarios.gestao.repository.FuncionarioRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -55,13 +57,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public Map<Long, FuncionarioEntity> getFuncionarios() {
-        return null;
+    public Set<Map.Entry<Long, FuncionarioEntity>> getFuncionarios(Map<Long, FuncionarioEntity> funcionarios) {
+        return funcionarioRepository.getFuncionarios(funcionarios);
     }
 
     @Override
-    public Map<Long, FuncionarioEntity> getFuncionarioById() {
-        return null;
+    public FuncionarioResponseDTO getFuncionarioById(Map<Long, FuncionarioEntity> funcionarios, Long id) {
+        return funcionarioRepository.getFuncionarioById(funcionarios, id);
     }
 
     @Override
